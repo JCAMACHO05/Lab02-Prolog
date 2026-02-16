@@ -105,3 +105,47 @@ batman_can_win(EnergiaMaxima) :-
 
 %batman_can_win(50)= False
 %batman_can_win(60)= True
+
+% EJERCICIO 3
+
+es_meta(Estado) :-
+    length(Estado, 8).
+
+siguiente_estado(EstadoActual, NuevoEstado) :-
+    length(EstadoActual, ColumnaActual),
+    ColumnaSiguiente is ColumnaActual + 1,
+    between(1, 8, Fila),
+    es_segura(Fila, ColumnaSiguiente, EstadoActual),
+    append(EstadoActual, [Fila], NuevoEstado).
+
+es_segura(_, _, []).
+
+es_segura(Fila, Columna, EstadoActual) :-
+    verificar(Fila, Columna, EstadoActual, 1).
+
+verificar(_, _, [], _).
+
+verificar(Fila, Columna, [FilaExistente|Resto], ColumnaExistente) :-
+    Fila =\= FilaExistente,
+    abs(Fila - FilaExistente) =\= abs(Columna - ColumnaExistente),
+    NuevaColumna is ColumnaExistente + 1,
+    verificar(Fila, Columna, Resto, NuevaColumna).
+
+% Caso base
+dfs(EstadoActual, _, EstadoActual) :-
+    es_meta(EstadoActual).
+
+% Caso recursivo
+dfs(EstadoActual, Visitados, SolucionFinal) :-
+    siguiente_estado(EstadoActual, EstadoSiguiente),
+    \+ member(EstadoSiguiente, Visitados),
+    dfs(EstadoSiguiente,
+        [EstadoSiguiente | Visitados],
+        SolucionFinal).
+
+solucion(Solucion) :-
+    EstadoInicial = [],
+    dfs(EstadoInicial, [EstadoInicial], Solucion).
+
+% solucion(S) 
+% S = [1, 5, 8, 6, 3, 7, 2, 4]
