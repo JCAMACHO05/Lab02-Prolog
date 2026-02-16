@@ -38,3 +38,70 @@ buscar_solucion(Solucion) :-
     EstadoInicial = pos(orilla_inicial),
     dfs(EstadoInicial, [EstadoInicial], Solucion). 
 % buscar_soluciones(S)
+
+
+
+
+%EJERCICIO 2
+
+power_list([
+    power(logica, 100, 10),
+    power(sigilo, 150, 30),
+    power(fuerza, 250, 50)
+]).
+
+villain_list([
+    villain(riddler, 90, [logica, sigilo]),
+    villain(bane, 240, [fuerza])
+]).
+
+es_meta(estado([], _, _)).
+siguiente_estado(
+    estado(Villanos, Poderes, Energia),
+    estado(NuevosVillanos, Poderes, NuevaEnergia)
+) :-
+    member(villain(Nombre, Vida, Debilidades), Villanos),
+    member(power(Poder, Danio, Costo), Poderes),
+
+    % Verificar debilidad
+    member(Poder, Debilidades),
+
+    % Verificar energia suficiente
+    Energia >= Costo,
+
+    NuevaEnergia is Energia - Costo,
+    NuevaVida is Vida - Danio,
+
+    actualizar_villanos(
+        villain(Nombre, Vida, Debilidades),
+        NuevaVida,
+        Villanos,
+        NuevosVillanos
+    ).
+
+actualizar_villanos(Villano, NuevaVida, Villanos, NuevosVillanos) :-
+    select(Villano, Villanos, Resto),
+    (
+        NuevaVida =< 0
+        -> NuevosVillanos = Resto
+        ;  Villano = villain(N, _, D),
+           NuevosVillanos = [villain(N, NuevaVida, D) | Resto]
+    ).
+
+dfs(Estado, _) :-
+    es_meta(Estado).
+
+dfs(EstadoActual, Visitados) :-
+    siguiente_estado(EstadoActual, EstadoSiguiente),
+    \+ member(EstadoSiguiente, Visitados),
+    dfs(EstadoSiguiente,
+        [EstadoSiguiente | Visitados]).
+
+batman_can_win(EnergiaMaxima) :-
+    power_list(Superpoderes),
+    villain_list(Villanos),
+    EstadoInicial = estado(Villanos, Superpoderes, EnergiaMaxima),
+    dfs(EstadoInicial, [EstadoInicial]).
+
+%batman_can_win(50)= False
+%batman_can_win(60)= True
