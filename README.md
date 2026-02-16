@@ -157,11 +157,26 @@ solucion(Solucion) :-
 
 ## Retrospectiva
 1. ¿Cuál fue el tiempo total invertido en el laboratorio por cada uno de ustedes? (Horas/Hombre)
+Mi tiempo invertido en el laboratorio fue de 1 hora y 58 minutos, lo que equivale aproximadamente a 1.97 horas/hombre.
 2. ¿Cuál es el estado actual del laboratorio? ¿Por qué?
+El laboratorio se encuentra finalizado y funcional, ya que se logró implementar correctamente el algoritmo solicitado utilizando DFS. El programa cumple con los requerimientos planteados, permite ejecutar las consultas sin errores y genera los resultados esperados.
 3. ¿Cuál consideran fue el mayor logro? ¿Por qué?
+El mayor logro fue modelar correctamente el problema como un espacio de estados y aplicar el algoritmo DFS de manera adecuada. Esto permitió comprender cómo representar estados, generar sucesores y definir correctamente el estado meta. Además, se logró evitar ciclos mediante el uso de la lista de visitados.
 4. ¿Cuál consideran que fue el mayor problema técnico? ¿Qué hicieron para resolverlo?
-5. ¿Qué hicieron bien como equipo? ¿Qué se comprometen a hacer para mejorar los resultados?
-6. ¿Qué referencias usaron? ¿Cuál fue la más útil? Incluyan citas con estándares adecuados.
+El mayor problema técnico fue definir correctamente la regla siguiente_estado/2, especialmente al momento de manejar las condiciones del problema (como restricciones o validaciones).
 
+Para solucionarlo, se revisó paso a paso la lógica del estado, se probaron consultas intermedias en Prolog y se realizaron ajustes hasta asegurar que la generación de sucesores fuera correcta y consistente.
+
+5. ¿Qué hicieron bien como equipo? ¿Qué se comprometen a hacer para mejorar los resultados?
+Como equipo, trabajamos bien en la distribución de tareas y verificación del código, asegurándonos de que cada parte del algoritmo funcionara correctamente antes de integrarlo.
+
+Nos comprometemos a mejorar en la planificación del tiempo y en la documentación del código, para facilitar futuras revisiones y hacer más eficiente el proceso de desarrollo.
+6. ¿Qué referencias usaron? ¿Cuál fue la más útil? Incluyan citas con estándares adecuados.
+Se utilizaron las siguientes referencias:
+	•	Russell, S., & Norvig, P. (2021). Artificial Intelligence: A Modern Approach (4th ed.). Pearson.
+	•	Bratko, I. (2012). Prolog Programming for Artificial Intelligence (4th ed.). Addison-Wesley.
+	•	Material de clase y diapositivas del curso.
+
+La referencia más útil fue Russell & Norvig (2021), ya que explica de manera clara el algoritmo de búsqueda en profundidad (DFS) y su aplicación en problemas de espacio de estados.
 
 
