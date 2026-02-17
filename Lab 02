@@ -39,9 +39,6 @@ buscar_solucion(Solucion) :-
     dfs(EstadoInicial, [EstadoInicial], Solucion). 
 % buscar_soluciones(S)
 
-
-
-
 %EJERCICIO 2
 
 power_list([
